@@ -7,6 +7,7 @@
     android:resizeMode="vertical|horizontal"
     android:updatePeriodMillis="360000"
     android:widgetCategory="home_screen"
-    android:previewImage="@drawable/androidw">
+    android:previewImage="@drawable/android_icon_widget"
+    android:configure="com.idir.androidwidget.ExampleAppWidgetConfig">
 
 </appwidget-provider>
