@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/drawable/gradient.xml" value="0.1638888888888889" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/activity_example_app_widget_config.xml" value="0.21" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/activity_exemple_app_widget_config.xml" value="0.13677536231884058" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/activity_main.xml" value="0.13677536231884058" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/example_widget.xml" value="0.25" />
+        <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/example_widget_item.xml" value="0.13677536231884058" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/exemple_widget.xml" value="0.13677536231884058" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/layout/new_app_widget.xml" value="0.10182370820668693" />
         <entry key="..\:/Users/ibelm/AndroidStudioProjects/AndroidWidget/app/src/main/res/xml/example_appwidget_info.xml" value="0.13677536231884058" />

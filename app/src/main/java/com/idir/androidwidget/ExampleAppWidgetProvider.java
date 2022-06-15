@@ -9,6 +9,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -27,9 +28,15 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
             SharedPreferences preferences = context.getSharedPreferences(SHARED_PRES, Context.MODE_PRIVATE);
             String buttonText = preferences.getString(KEY_BUTTON_TEXT + appWidgetId, "thank you");
 
+            Intent serviceIntent = new Intent(context, ExampleWidgetServices.class);
+            serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.example_widget);
             views.setOnClickPendingIntent(R.id.example_widget_button, pendingIntent);
             views.setCharSequence(R.id.example_widget_button, "setText", buttonText);
+            views.setRemoteAdapter(R.id.example_widget_stack_view, serviceIntent);
+            views.setEmptyView(R.id.example_widget_stack_view, R.id.example_widget_empty_view);
 
             Bundle appWidgetOptions = appWidgetManager.getAppWidgetOptions(appWidgetId);
             resizeWidget(appWidgetOptions, views);
@@ -57,10 +64,12 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
                 + "\nminHeight: " + minHeight + "\nmaxHeight: " + maxHeight;
         Toast.makeText(context, dimension, Toast.LENGTH_SHORT).show();*/
 
-        if (maxHeight > 102 /*your maxHeight phone widget*/){
+        if (maxHeight > 250 /*your maxHeight phone widget*/){
             views.setViewVisibility(R.id.example_widget_text, View.VISIBLE);
+            views.setViewVisibility(R.id.example_widget_button, View.VISIBLE);
         }else {
             views.setViewVisibility(R.id.example_widget_text, View.GONE);
+            views.setViewVisibility(R.id.example_widget_button, View.GONE);
         }
 
     }
