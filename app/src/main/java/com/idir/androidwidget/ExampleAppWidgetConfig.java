@@ -1,5 +1,6 @@
 package com.idir.androidwidget;
 
+import static com.idir.androidwidget.ExampleAppWidgetProvider.ACTION_REFRESH;
 import static com.idir.androidwidget.ExampleAppWidgetProvider.ACTION_TOAST;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,6 +59,7 @@ public class ExampleAppWidgetConfig extends AppCompatActivity {
 
         Intent clickIntent = new Intent(this, ExampleAppWidgetProvider.class);
         clickIntent.setAction(ACTION_TOAST);
+        clickIntent.setAction(ACTION_REFRESH);
         PendingIntent clickPendingIntent = PendingIntent.getBroadcast(this, 0, clickIntent, 0);
 
         RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.example_widget);

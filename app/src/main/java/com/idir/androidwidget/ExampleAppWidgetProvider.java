@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class ExampleAppWidgetProvider extends AppWidgetProvider {
 
     public static final String ACTION_TOAST = "actionToast";
+    public static final String ACTION_REFRESH = "actionRefresh";
     public static final String EXTRA_ITEM_POSITION = "extraItemPosition";
 
     @Override
@@ -37,6 +38,7 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
 
             Intent clickIntent = new Intent(context, ExampleAppWidgetProvider.class);
             clickIntent.setAction(ACTION_TOAST);
+            clickIntent.setAction(ACTION_REFRESH);
             PendingIntent clickPendingIntent = PendingIntent.getBroadcast(context, 0, clickIntent, 0);
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.example_widget);
@@ -50,6 +52,9 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
             resizeWidget(appWidgetOptions, views);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
+
+            //to update the collection view
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.example_widget_stack_view);
         }
     }
 
@@ -102,9 +107,17 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //for position
         if (ACTION_TOAST.equals(intent.getAction())){
             int clickPosition = intent.getIntExtra(EXTRA_ITEM_POSITION, 0);
             Toast.makeText(context, "Clicked position: " + clickPosition, Toast.LENGTH_SHORT).show();
+        }
+        //for time refresh (when clicked)
+        if (ACTION_REFRESH.equals(intent.getAction())){
+            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.example_widget_stack_view);
+            Toast.makeText(context, "refresh", Toast.LENGTH_SHORT).show();
         }
         super.onReceive(context, intent);
     }

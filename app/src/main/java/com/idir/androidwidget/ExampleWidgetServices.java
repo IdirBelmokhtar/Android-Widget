@@ -9,6 +9,9 @@ import android.os.SystemClock;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class ExampleWidgetServices extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -35,7 +38,11 @@ public class ExampleWidgetServices extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-
+            //refresh data
+            Date date = new Date();
+            String timeFormatted = DateFormat.getTimeInstance(DateFormat.SHORT).format(date);
+            exampleData = new String[]{"one\n" + timeFormatted, "two\n" + timeFormatted, "three\n" + timeFormatted};
+            SystemClock.sleep(3000);
         }
 
         @Override
@@ -54,7 +61,10 @@ public class ExampleWidgetServices extends RemoteViewsService {
             views.setTextViewText(R.id.example_widget_item_text, exampleData[i]);
 
             Intent fillIntent = new Intent();
+            //for position
             fillIntent.putExtra(EXTRA_ITEM_POSITION, i);
+            //for time refresh (when clicked)
+            fillIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             views.setOnClickFillInIntent(R.id.example_widget_item_text, fillIntent);
 
             SystemClock.sleep(500);
